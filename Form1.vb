@@ -1,4 +1,4 @@
-﻿Public Class Form1
+Public Class Form1
 
     Public Declare Sub mouse_event Lib "user32" Alias "mouse_event" (ByVal dwlags As Integer, ByVal dx As Integer, ByVal dy As Integer, ByVal cbuttons As Integer, ByVal dwExtraInfo As Integer)
 
@@ -16,13 +16,13 @@
 
     Public Sub take_object()
         Cursor.Position = take_point + New Point(gen.Next(-5, 5), 0)
-        System.Threading.Thread.Sleep(2)
+        System.Threading.Thread.Sleep(0.6)
         mouse_event(&H2, 0, 0, 0, 0)
         System.Threading.Thread.Sleep(0.6)
         mouse_event(&H4, 0, 0, 0, 0)
     End Sub
     Public Sub make_object()
-        System.Threading.Thread.Sleep(2)
+        System.Threading.Thread.Sleep(0.6)
         mouse_event(&H2, 0, 0, 0, 0)
         System.Threading.Thread.Sleep(0.6)
         mouse_event(&H4, 0, 0, 0, 0)
@@ -34,7 +34,7 @@
         Dim start_point As New PointF(CSng(up_point.X), CSng(up_point.Y))
         Dim end_point As New PointF(CSng(down_point.X), CSng(down_point.Y))
 
-        Dim point_count As Integer = gen.Next(2, 6)
+        Dim point_count As Integer = gen.Next(2, 4)
 
         For i As Integer = 0 To point_count - 1
             Dim t As Single = CSng(i) / CSng(point_count - 1)
@@ -45,11 +45,11 @@
 
         points.Reverse()
         For Each pointF In points
-            System.Threading.Thread.Sleep(gen.Next(0.6, 1))
+            System.Threading.Thread.Sleep(0.6)
             Dim point As New Point(CInt(pointF.X), CInt(pointF.Y))
             Cursor.Position = point
         Next
-        points.Clear()
+
     End Sub
     Public Sub make_move_back(up_point, down_point)
         Dim points As New List(Of PointF)
@@ -58,7 +58,7 @@
         Dim finish_point As New PointF(CSng(down_point.X), CSng(down_point.Y))
         Dim middle_point As New PointF(CSng(up_point.X / 2 + down_point.X / 2), CSng(up_point.Y / 2 + down_point.Y / 2))
 
-        Dim point_count As Integer = gen.Next(2, 4)
+        Dim point_count As Integer = gen.Next(2, 3)
 
         For i As Integer = 0 To point_count - 1
             Dim t As Single = CSng(i) / CSng(point_count - 1)
@@ -75,11 +75,11 @@
         Next
 
         For Each pointF In points
-            System.Threading.Thread.Sleep(gen.Next(0.6, 0.8))
+            System.Threading.Thread.Sleep(0.6)
             Dim point As New Point(CInt(pointF.X), CInt(pointF.Y))
             Cursor.Position = point
         Next
-        points.Clear()
+
     End Sub
     Public Sub mouse_move()
         take_object()
